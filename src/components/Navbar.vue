@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Stella Vogue</a>
+      <a class="navbar-brand" href="#">Vue-Portfolio</a>
       <button
         class="navbar-toggler"
         type="button"
