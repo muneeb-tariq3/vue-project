@@ -27,7 +27,7 @@ const skills = [
     'Age: 15',
     'Country: Pakistan',
     'Phone: +92 300 6657269',
-    'Email: your@email.com'
+    'Email: muneebtariq841@email.com'
   ]
 },
   {

@@ -10,14 +10,12 @@
         >
           <div
             class="card service-card h-100 fade-in"
-            :style="{ animationDelay: `${index * 0.3}s` }"
+            :style="{ animationDelay: `${index * 0.2}s` }"
           >
-            <div class="card-body">
-              <div class="text-center mb-3">
-                <i :class="service.icon" class="service-icon"></i>
-              </div>
-              <h5 class="card-title text-center">{{ service.title }}</h5>
-              <ul class="service-points">
+            <div class="card-body text-center">
+              <i :class="service.icon" class="service-icon mb-3"></i>
+              <h5 class="card-title">{{ service.title }}</h5>
+              <ul class="service-points mt-3">
                 <li v-for="(point, i) in service.points" :key="i">
                   {{ point }}
                 </li>
@@ -84,105 +82,76 @@ const services = [
 </script>
 
 <style scoped>
-/* Section styling */
 .services {
   background-color: #1D2D44;
 }
 .section-title {
   color: #F0EBD8;
+  font-size: 2rem;
 }
 
-/* Card base style */
+/* Card style */
 .service-card {
   background-color: #0D1321;
   border: 1px solid #3E5C76;
   color: #F0EBD8;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  padding-bottom: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-/* Hover effect */
 .service-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 20px rgba(116, 140, 171, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 0 12px rgba(116, 140, 171, 0.3);
 }
 
-/* Icon & Title */
+/* Icon */
 .service-icon {
   color: #3E5C76;
-  font-size: 2rem;
-}
-.card-title {
-  color: #748CAB;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-size: 2.2rem;
 }
 
-/* Description (points) appear on hover */
-.service-points {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease;
-  padding-left: 1.2rem;
-  list-style-type: disc;
-  font-size: 0.9rem;
+/* Title */
+.card-title {
+  font-weight: 600;
+  color: #748CAB;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
 }
-.service-card:hover .service-points {
-  max-height: 300px;
+
+/* Bullet points */
+.service-points {
+  list-style: disc;
+  padding-left: 1.2rem;
+  font-size: 0.92rem;
+  color: #F0EBD8;
 }
 .service-points li {
-  color: #F0EBD8;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
-/* Fade-in animation */
+/* Animation */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.6s ease forwards;
+  transform: translateY(10px);
+  animation: fadeUp 0.5s ease-out forwards;
 }
-
 @keyframes fadeUp {
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-.service-card {
-  background-color: #0D1321;
-  border: 1px solid #3E5C76;
-  color: #F0EBD8;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  padding-bottom: 1rem;
-  height: 400px; /* 🧱 Fixed height */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
 
-/* Keep this hidden content within the card */
-.service-points {
-  max-height: 160px; /* fixed inner scrollable area */
-  overflow-y: auto;
-  padding-left: 1.2rem;
-  list-style-type: disc;
-  font-size: 0.9rem;
-  transition: none;
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .card-title {
+    font-size: 1rem;
+  }
+  .service-icon {
+    font-size: 1.6rem;
+  }
+  .service-points {
+    font-size: 0.85rem;
+  }
 }
-
-/* Optional: improve scrollbar styling */
-.service-points::-webkit-scrollbar {
-  width: 5px;
-}
-.service-points::-webkit-scrollbar-thumb {
-  background: #3E5C76;
-  border-radius: 10px;
-}
-
 </style>
