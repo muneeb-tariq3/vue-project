@@ -12,13 +12,6 @@
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ project.title }}</h5>
               <p class="card-text flex-grow-1">{{ project.description }}</p>
-              <a
-                :href="project.link"
-                target="_blank"
-                class="btn btn-outline-light mt-auto"
-              >
-                View Project
-              </a>
             </div>
           </div>
         </div>
