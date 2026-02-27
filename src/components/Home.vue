@@ -1,41 +1,29 @@
 <template>
-  <section class="home-section" id="home">
-    <div class="overlay"></div>
+  <section class="hero-section" id="home">
+    <div class="container text-center hero-content">
+      
+      <!-- Intro Text -->
+      <h1 class="hero-title">Hi, I'm <span class="highlight">Muneeb</span></h1>
+      <h2 class="hero-subtitle">{{ displayedText }}</h2>
+      <p class="hero-desc">
+        I create clean, responsive, and modern web interfaces
+        using Vue.js, TailwindCSS, Bootstrap, and JavaScript.
+        I focus on smooth user experiences and interactive UI.
+      </p>
 
-    <div class="container content">
-      <div class="row align-items-center min-vh-100">
-
-        <!-- LEFT CONTENT -->
-        <div class="col-lg-6 text-lg-start text-center mb-5 mb-lg-0">
-          <h1 class="display-4 fw-bold text-light mb-3">
-            Hi, I'm <span class="highlight">Muneeb</span>
-          </h1>
-
-          <h3 class="typing-text mb-4">{{ displayedText }}</h3>
-
-          <p class="lead text-light mb-4">
-            Front-end developer crafting fast, responsive and elegant web
-            experiences using Vue.js and modern JavaScript.
-          </p>
-
-          <a href="#projects" class="btn btn-outline-light btn-lg custom-btn me-3">
-            View Projects
-          </a>
-          <a href="#contact" class="btn btn-outline-light btn-lg custom-btn">
-            Contact Me
-          </a>
-        </div>
-
-        <!-- RIGHT IMAGE -->
-        <div class="col-lg-6 text-center">
-          <img
-            src="/assets/muneeb-hero.webp"
-            alt="Muneeb Tariq"
-            class="hero-img"
-          />
-        </div>
-
+      <!-- Buttons -->
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-main">View Projects</a>
+        <a href="#contact" class="btn-outline">Contact Me</a>
       </div>
+
+      <!-- Scroll Down -->
+      <div class="scroll-down">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
     </div>
   </section>
 </template>
@@ -43,7 +31,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-const roles = ['Web Developer', 'UI Designer', 'Freelancer']
+const roles = ['Frontend Developer', 'UI Designer', 'Freelancer', 'AI-Assisted Coder']
 const displayedText = ref('')
 let current = 0
 
@@ -51,14 +39,13 @@ function typeRole() {
   let text = roles[current]
   let i = 0
   displayedText.value = ''
-
   const typing = setInterval(() => {
     if (i < text.length) {
       displayedText.value += text[i]
       i++
     } else {
       clearInterval(typing)
-      setTimeout(eraseRole, 1800)
+      setTimeout(eraseRole, 2000)
     }
   }, 100)
 }
@@ -70,7 +57,7 @@ function eraseRole() {
     } else {
       clearInterval(erasing)
       current = (current + 1) % roles.length
-      setTimeout(typeRole, 400)
+      setTimeout(typeRole, 300)
     }
   }, 50)
 }
@@ -79,75 +66,137 @@ onMounted(typeRole)
 </script>
 
 <style scoped>
-.home-section {
-  position: relative;
+/* Background gradient with soft animated particles */
+.hero-section {
   min-height: 100vh;
-  background: url('https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=1600&q=80')
-    no-repeat center center / cover;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(13, 19, 33, 0.88),
-    rgba(15, 23, 42, 0.95)
-  );
-  z-index: 1;
-}
-
-.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  z-index: 2;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  overflow: hidden;
 }
 
-.highlight {
-  color: #00e5ff;
+/* Particle animation using pseudo-elements */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(#38bdf8 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: moveParticles 30s linear infinite;
+  opacity: 0.1;
+  z-index: 0;
 }
 
-.typing-text {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #00e5ff;
-  min-height: 2.5rem;
+@keyframes moveParticles {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(50px, 50px) rotate(360deg); }
 }
 
-.custom-btn {
+/* Content */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: #e5e7eb;
+  max-width: 700px;
+  animation: fadeInUp 1.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Titles */
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #22d3ee;
+  margin-bottom: 0.5rem;
+  animation: fadeInDown 1.5s ease forwards;
+}
+.hero-subtitle {
+  font-size: 1.8rem;
+  color: #cbd5f5;
+  font-weight: 500;
+  min-height: 2rem;
+  margin-bottom: 1rem;
+}
+.hero-desc {
+  color: #94a3b8;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.hero-buttons a {
+  display: inline-block;
+  margin: 0.5rem 0.5rem;
+  padding: 0.8rem 2rem;
   border-radius: 30px;
-  padding: 0.75rem 2rem;
-  border-color: #00e5ff;
-  color: #ffffff;
+  font-weight: 600;
   transition: all 0.3s ease;
+  text-decoration: none;
+}
+.btn-main {
+  background-color: #22d3ee;
+  color: #020617;
+}
+.btn-main:hover {
+  background-color: #38bdf8;
+  transform: scale(1.05);
+}
+.btn-outline {
+  border: 2px solid #22d3ee;
+  color: #22d3ee;
+}
+.btn-outline:hover {
+  background-color: #22d3ee;
+  color: #020617;
+  transform: scale(1.05);
 }
 
-.custom-btn:hover {
-  background-color: #00e5ff;
-  color: #0d1321;
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+/* Scroll down animation */
+.scroll-down {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.scroll-down span {
+  width: 6px;
+  height: 6px;
+  background: #22d3ee;
+  border-radius: 50%;
+  animation: scrollBounce 1.5s infinite;
+}
+.scroll-down span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.scroll-down span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+@keyframes scrollBounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(12px); opacity: 1; }
 }
 
-.hero-img {
-  max-width: 380px;
-  width: 100%;
-  border-radius: 20px;
-  box-shadow:
-    0 0 40px rgba(0, 229, 255, 0.35),
-    0 30px 60px rgba(0, 0, 0, 0.6);
-  transition: transform 0.4s ease;
+/* Fade in down animation for title */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-.hero-img:hover {
-  transform: translateY(-8px);
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-  .display-4 {
-    font-size: 2.1rem;
-  }
-
-  .typing-text {
-    font-size: 1.2rem;
-  }
+  .hero-title { font-size: 2rem; }
+  .hero-subtitle { font-size: 1.2rem; }
+  .hero-desc { font-size: 0.9rem; }
 }
 </style>
