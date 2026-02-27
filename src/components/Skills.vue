@@ -1,167 +1,132 @@
 <template>
-  <section class="skills-resume py-5" id="skills">
+  <section class="skills-section py-5" id="skills">
     <div class="container">
-      <h2 class="section-title text-center mb-5 text-light">Professional Skills</h2>
-      <div class="row gy-4">
-        <div class="col-md-6" v-for="(skill, index) in skills" :key="index">
-          <div class="resume-skill p-4 rounded">
-            <h4 class="skill-title">{{ skill.name }}</h4>
-            <p class="skill-summary">{{ skill.summary }}</p>
-            <ul class="skill-details">
-              <li v-for="(point, idx) in skill.points" :key="idx">{{ point }}</li>
+      <h2 class="section-title text-center mb-5">Skills & Expertise</h2>
+
+      <div class="row g-4">
+
+        <!-- Frontend -->
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <h5>Frontend Development</h5>
+            <ul>
+              <li>HTML5 & Semantic Markup</li>
+              <li>CSS3 & Responsive Design</li>
+              <li>JavaScript (ES6+)</li>
+              <li>TypeScript (Basics)</li>
+              <li>Bootstrap</li>
             </ul>
           </div>
         </div>
+
+        <!-- Frameworks -->
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <h5>Frameworks & Libraries</h5>
+            <ul>
+              <li>Vue.js (Vue 3)</li>
+              <li>React.js (Basics)</li>
+              <li>Single Page Applications (SPA)</li>
+              <li>Component-Based Architecture</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Programming -->
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <h5>Programming</h5>
+            <ul>
+              <li>JavaScript</li>
+              <li>Python</li>
+              <li>PHP (Familiarity via Training)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- AI & Tools -->
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <h5>AI-Assisted Coding</h5>
+            <ul>
+              <li>Using AI tools to speed up development</li>
+              <li>Debugging & code optimization with AI</li>
+              <li>Prompt-based UI & logic generation</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- DevOps -->
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <h5>Development & OS</h5>
+            <ul>
+              <li>Linux (Command Line)</li>
+              <li>Git & GitHub</li>
+              <li>GitHub → Netlify Deployment</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Database -->
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <h5>Database & Backend Basics</h5>
+            <ul>
+              <li>Database Creation (Basic)</li>
+              <li>Understanding Backend Workflows</li>
+              <li>API Consumption (Frontend)</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-const skills = [
-{
-  name: 'Personal Info',
-  summary: 'Basic personal details for contact and identification.',
-  points: [
-    'Full Name: Muneeb-ur-Rehman',
-    'Age: 15',
-    'Country: Pakistan',
-    'Phone: +92 300 6657269',
-    'Email: muneebtariq841@email.com'
-  ]
-},
-  {
-    name: 'Vue.js',
-    summary: 'Building fast and dynamic front-end apps using Vue 3.',
-    points: [
-      'Proficient in Composition & Options API',
-      'Created reusable and modular components',
-      'Used Vue Router and state tools like Pinia',
-      'Experienced with transitions and conditional rendering',
-      'Built full Vue.js projects with routing and animation'
-    ]
-  },
-  {
-    name: 'Tailwind CSS',
-    summary: 'Rapid styling using utility-first classes for responsive design.',
-    points: [
-      'Custom themes and responsive layouts',
-      'Used with Vue & React for modern UI',
-      'Tailored configs for design systems',
-      'Built pixel-perfect UIs quickly',
-      'Good grasp of Flex/Grid using Tailwind'
-    ]
-  },
-  {
-    name: 'JavaScript (ES6+)',
-    summary: 'Core language for web development and interaction.',
-    points: [
-      'Used modern JS: ES6+, async/await, arrow functions',
-      'DOM manipulation, API requests, and event handling',
-      'Clear understanding of scoping and hoisting',
-      'Built interactive UIs and data-based features',
-      'Comfortable debugging and optimizing scripts'
-    ]
-  },
-  {
-    name: 'React',
-    summary: 'Component-based development with reusable logic.',
-    points: [
-      'Built SPAs with React Router and Hooks',
-      'Used functional components and props',
-      'Styled using CSS Modules and Bootstrap',
-      'Managed local state and forms',
-      'Integrated APIs and third-party libraries'
-    ]
-  },
-  {
-    name: 'Angular 20',
-    summary: 'Developed structured apps with TypeScript & RxJS.',
-    points: [
-      'Used CLI for scaffolding and lazy loading',
-      'Created services, modules, and routing guards',
-      'Two-way binding with forms and inputs',
-      'Handled Observables and HttpClient',
-      'Built enterprise-level modules and features'
-    ]
-  },
-  {
-    name: 'Bootstrap 5',
-    summary: 'Created consistent and responsive UIs.',
-    points: [
-      'Grid system, spacing, utility-first styling',
-      'Used navbars, cards, modals, carousels',
-      'Quick prototypes and real-world pages',
-      'Customized components with SCSS variables',
-      'Perfect for landing pages and admin panels'
-    ]
-  },
-  {
-  name: 'HTML5',
-  summary: 'Foundation of all modern web pages and apps.',
-  points: [
-    'Structured semantic elements for accessibility',
-    'Handled form controls and validations',
-    'Integrated audio, video, and media tags',
-    'Used with SEO and responsive techniques',
-    'Built layout wireframes with divs and sections'
-  ]
-},
-{
-  name: 'CSS3',
-  summary: 'Styling web pages with modern effects and layouts.',
-  points: [
-    'Used Flexbox and Grid for responsive layouts',
-    'Created animations and transitions',
-    'Applied custom variables and media queries',
-    'Used pseudo-selectors and layering techniques',
-    'Styled web forms, buttons, and modals'
-  ]
-},
-  {
-    name: 'Git & GitHub',
-    summary: 'Version control and collaborative development.',
-    points: [
-      'Created and maintained personal repositories',
-      'Used branching and pull requests effectively',
-      'Collaborated on multi-dev projects',
-      'Managed commits and resolved conflicts',
-      'Deployed apps via GitHub Pages'
-    ]
-  }
-]
+// Static skills section – no JS needed (best for Lighthouse)
 </script>
 
 <style scoped>
-.skills-resume {
-  background-color: #0D1321;
+.skills-section {
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: #e5e7eb;
 }
 
-.resume-skill {
-  background-color: #1D2D44;
-  color: #F0EBD8;
-  border: 1px solid #3E5C76;
+.section-title {
+  font-weight: 700;
+  color: #f8fafc;
 }
 
-.skill-title {
-  font-size: 1.5rem;
-  color: #748CAB;
-  font-weight: bold;
+.skill-card {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.skill-summary {
-  font-style: italic;
-  font-size: 0.95rem;
-  margin-bottom: 0.5rem;
+.skill-card:hover {
+  transform: translateY(-4px);
+  border-color: #38bdf8;
 }
 
-.skill-details {
-  padding-left: 1.2rem;
-  list-style-type: disc;
+.skill-card h5 {
+  margin-bottom: 1rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.skill-card ul {
+  padding-left: 1rem;
   margin: 0;
 }
 
-.skill-details li {
+.skill-card li {
   margin-bottom: 0.4rem;
+  font-size: 0.95rem;
 }
 </style>
