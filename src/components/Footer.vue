@@ -63,44 +63,77 @@
 // No scripts needed (static footer)
 </script>
 
-<style scoped>
 .footer {
-  background-color: #1D2D44;
+  background: linear-gradient(180deg, #020617, #0b1120);
+  border-top: 1px solid rgba(34, 211, 238, 0.15);
 }
 
 .footer-title {
-  color: #F0EBD8;
-  font-weight: bold;
+  color: #e5e7eb;
+  font-weight: 600;
   margin-bottom: 0.75rem;
 }
 
-.footer-link {
-  color: #748CAB;
-  text-decoration: none;
+.footer p {
+  color: #94a3b8;
+  font-size: 0.95rem;
 }
+
+.footer-link {
+  color: #cbd5f5;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: #22d3ee;
+  transition: width 0.3s ease;
+}
+
 .footer-link:hover {
-  color: #F0EBD8;
+  color: #22d3ee;
+}
+
+.footer-link:hover::after {
+  width: 100%;
 }
 
 .btn-accent {
-  background-color: #3E5C76;
-  color: #F0EBD8;
+  background-color: #22d3ee;
+  color: #020617;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
+
 .btn-accent:hover {
-  background-color: #0D1321;
-  color: #F0EBD8;
+  background-color: #38e8ff;
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.6);
 }
 
 .footer-separator {
-  border-color: #3E5C76;
+  border-color: rgba(34, 211, 238, 0.15);
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
 }
 
 .social-link {
-  color: #F0EBD8;
-  font-size: 1.25rem;
-  margin-left: 0.75rem;
+  color: #cbd5f5;
+  font-size: 1.3rem;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
+
 .social-link:hover {
-  color: #748CAB;
+  color: #22d3ee;
+  transform: translateY(-4px);
 }
-</style>
