@@ -1,103 +1,112 @@
 <template>
-  <section class="projects py-5" id="projects">
+  <section class="projects-section py-5" id="projects">
     <div class="container">
-      <h2 class="section-title text-center text-light mb-5">Projects</h2>
-      <div class="row gy-4">
-        <div
-          class="col-md-6 col-lg-4"
-          v-for="(project, index) in projects"
-          :key="index"
-        >
-          <div class="card h-100 project-card">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">{{ project.title }}</h5>
-              <p class="card-text flex-grow-1">{{ project.description }}</p>
-            </div>
+      <h2 class="section-title text-center mb-5">Projects</h2>
+
+      <div class="row g-4">
+
+        <!-- Project 1 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card">
+            <h5>School Portfolio Website</h5>
+            <p>
+              Built a responsive portfolio website for a local school to showcase classes,
+              teachers, facilities, and success stories. Integrated smooth navigation,
+              interactive sections, and dynamic content cards. Added pricing cards for
+              each class from Play/Nursery up to grade 10. Focused on mobile-friendly
+              design, user-friendly layout, and fast loading. Created a feedback page
+              to collect student and parent comments with basic security measures.
+            </p>
+            <p class="tech">Tech Stack: PHP, HTML5, CSS3, JS, Tailwind | Deployment: Web hosting</p>
           </div>
         </div>
+
+        <!-- Project 2 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card">
+            <h5>IMS – Institute Management System</h5>
+            <p>
+              Developed a complete Institute Management System as part of a small team.
+              The system manages student registration, teacher profiles, course schedules,
+              and exam records. Implemented responsive dashboards for both students and staff.
+              Added attendance tracking, performance analysis, and secure login features.
+              Backend was created using Python, frontend with Vue 3 and Bootstrap 5, and
+              interactive features powered by JavaScript. Both backend and frontend were
+              deployed online with proper routing and security best practices. Collaborative
+              workflow ensured smooth integration and version control with GitHub.
+            </p>
+            <p class="tech">Tech Stack: Python, Vue 3, Bootstrap 5, JS | Deployment: Backend + Frontend Online</p>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card">
+            <h5>College Management & Landing Page</h5>
+            <p>
+              Designed and implemented a comprehensive college landing page with
+              integrated management system to handle student, teacher, and office operations.
+              Created secure login systems for students, teachers, and administration
+              (MD) to monitor performance, manage salaries, and track academic progress.
+              The platform ensures role-based access control, data validation, and
+              protection against common security threats. The UI was designed to be
+              clear, intuitive, and responsive for all devices. Focused on streamlining
+              office and academic tasks while keeping data secure and easily accessible.
+            </p>
+            <p class="tech">Tech Stack: PHP, HTML5, CSS3, JS, Tailwind | Deployment: Online Hosting</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-const projects = [
-  {
-    title: "Vue Portfolio Website",
-    description:
-      "A modern portfolio site built with Vue.js and Bootstrap showcasing skills, projects, and contact form. Fully responsive and animated.",
-    link: "#"
-  },
-  {
-    title: "Music Player UI",
-    description:
-      "Frontend UI of a music player designed in Figma and built using Angular and Bootstrap. Includes responsive layout and animations.",
-    link: "#"
-  },
-  {
-    title: "NovaStore eCommerce",
-    description:
-      "Amazon-style eCommerce site built with HTML, CSS, and JS. Features product filtering, cart system, and responsive UI.",
-    link: "#"
-  },
-  {
-    title: "To-Do App (Vue)",
-    description:
-      "Feature-rich to-do app built in Vue with light/dark mode, due dates, priority tags, and persistent data using localStorage.",
-    link: "#"
-  },
-  {
-    title: "Fashnique (Odoo Website)",
-    description:
-      "An eCommerce fashion website developed using the Odoo platform. It features a modern interface, product listings, and secure checkout.",
-    link: "https://fashnique1.odoo.com"
-  }
-];
-
+// Static projects section, no JS needed
 </script>
 
 <style scoped>
-.projects {
-  background-color: #1D2D44;
+.projects-section {
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: #e5e7eb;
+  padding: 5rem 1rem;
+}
+
+.section-title {
+  font-weight: 700;
+  color: #22d3ee;
 }
 
 .project-card {
-  background-color: #0D1321;
-  color: #F0EBD8;
-  border: 1px solid #3E5C76;
-  transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  height: 100%;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  border-color: #38bdf8;
 }
 
-.card-title {
-  color: #748CAB;
-  font-weight: bold;
-}.projects {
-  background-color: #1D2D44;
-  perspective: 1000px;
+.project-card h5 {
+  color: #38bdf8;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
-.project-card {
-  background-color: #0D1321;
-  color: #F0EBD8;
-  border: 1px solid #3E5C76;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  transform-style: preserve-3d;
-  will-change: transform;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+.project-card p {
+  color: #cbd5f5;
+  font-size: 0.95rem;
 }
 
-.project-card:hover {
-  transform: rotateY(8deg) rotateX(4deg) scale(1.02);
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
+.project-card .tech {
+  margin-top: 0.75rem;
+  font-weight: 500;
+  color: #22d3ee;
+  font-size: 0.9rem;
 }
-
-.card-title {
-  color: #748CAB;
-  font-weight: bold;
-}
-
 </style>
