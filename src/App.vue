@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <slot /> <!-- Current page content injected -->
+  <slot /> <!-- Current page content -->
   <Footer />
 </template>
 
