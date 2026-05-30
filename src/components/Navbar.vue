@@ -35,7 +35,6 @@ const sections = [
   'Skills',
   'Services',
   'Projects',
-  'Testimonials',
   'Blog',
   'Contact'
 ]
