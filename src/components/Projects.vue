@@ -34,7 +34,30 @@ const projects = [
     description:
       "A modern portfolio site built with Vue.js and Bootstrap showcasing skills, projects, and contact form. Fully responsive and animated.",
     link: "#"
-  },
+  },{
+  title: "School Management System",
+  description:
+    "Full-stack school management platform built with React.js, Bootstrap, and Laravel. Contributed to frontend development, project management, and system planning in a two-developer team.",
+  link: "#"
+},
+{
+  title: "Python Voice Automation Assistant",
+  description:
+    "Desktop automation assistant built with Python that executes voice and text commands, manages files and folders, fetches Wikipedia information, and performs system operations on Windows and Linux.",
+  link: "#"
+},
+{
+  title: "2D Stickman Fighting Game",
+  description:
+    "Browser-based multiplayer fighting game developed using HTML, CSS, and JavaScript. Features 10 levels, boss battles, single-player mode, and local 2-player gameplay on PC and mobile.",
+  link: "#"
+},
+{
+  title: "AI Lyrics Generator",
+  description:
+    "AI-powered lyrics generation web application built with React.js, TypeScript, and OpenRouter API. Generates creative song lyrics from user prompts through a responsive and modern interface.",
+  link: "#"
+},
   {
     title: "Music Player UI",
     description:
