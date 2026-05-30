@@ -7,7 +7,6 @@ import About from './components/About.vue'
 import Skills from './components/Skills.vue'
 import Services from './components/Services.vue'
 import Projects from './components/Projects.vue'
-import Testimonials from './components/Testimonials.vue'
 import Blog from './components/Blog.vue'
 import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
@@ -31,7 +30,6 @@ function setSection(section) {
   <Skills v-if="activeSection === 'Skills'" />
   <Services v-if="activeSection === 'Services'" />
   <Projects v-if="activeSection === 'Projects'" />
-  <Testimonials v-if="activeSection === 'Testimonials'" />
   <Blog v-if="activeSection === 'Blog'" />
   <Contact v-if="activeSection === 'Contact'" />
   <Footer />
