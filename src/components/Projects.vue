@@ -43,7 +43,7 @@ const projects = [
 {
   title: "Python Voice Automation Assistant",
   description:
-    "Desktop automation assistant built with Python that executes voice and text commands, manages files and folders, fetches Wikipedia information, and performs system operations on Windows and Linux.",
+    "Desktop automation assistant built with Python that executes voice and text commands, manages files and folders, fetches Wikipedia information, and performs system operations on Windows and Linux Enviornments.",
   link: "#"
 },
 {
@@ -61,13 +61,7 @@ const projects = [
   {
     title: "Music Player UI",
     description:
-      "Frontend UI of a music player designed in Figma and built using Angular and Bootstrap. Includes responsive layout and animations.",
-    link: "#"
-  },
-  {
-    title: "NovaStore eCommerce",
-    description:
-      "Amazon-style eCommerce site built with HTML, CSS, and JS. Features product filtering, cart system, and responsive UI.",
+      "Frontend UI of a music player designed by Stich and built using React.js and Bootstrap. Includes responsive layout and animations.",
     link: "#"
   },
   {
@@ -76,12 +70,7 @@ const projects = [
       "Feature-rich to-do app built in Vue with light/dark mode, due dates, priority tags, and persistent data using localStorage.",
     link: "#"
   },
-  {
-    title: "Fashnique (Odoo Website)",
-    description:
-      "An eCommerce fashion website developed using the Odoo platform. It features a modern interface, product listings, and secure checkout.",
-    link: "https://fashnique1.odoo.com"
-  }
+  
 ];
 
 </script>
