@@ -1,65 +1,50 @@
 <template>
-  <footer class="footer" id="footer">
+  <footer class="footer">
 
-    <div class="footer-glass">
+    <div class="container">
 
       <!-- TOP SECTION -->
-      <div class="footer-grid">
+      <div class="top">
 
         <!-- BRAND -->
-        <div class="col">
-          <h3 class="logo">Muneeb-ur-Rehman</h3>
-          <p class="desc">
-            Front-End Developer focused on building modern, responsive,
-            and user-friendly web applications using Vue.js and modern web technologies.
+        <div class="brand">
+          <h2>Muneeb<span>.</span></h2>
+          <p>
+            Frontend developer focused on building modern UI systems and gaining real-world development experience.
           </p>
         </div>
 
-        <!-- QUICK LINKS -->
-        <div class="col">
-          <h4>Quick Links</h4>
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#contact">Contact</a>
+        <!-- NAV LINKS -->
+        <div class="links">
+          <h4>Navigation</h4>
+          <a @click="go('Home')">Home</a>
+          <a @click="go('About')">About</a>
+          <a @click="go('Skills')">Skills</a>
+          <a @click="go('Projects')">Projects</a>
+          <a @click="go('Services')">Services</a>
+          <a @click="go('Contact')">Contact</a>
         </div>
 
-        <!-- RESOURCES (CLEANED) -->
-        <div class="col">
-          <h4>Resources</h4>
-          <a href="#blog">Blog</a>
-          <a href="#services">Services</a>
-        </div>
-
-        <!-- CONNECT -->
-        <div class="col">
-          <h4>Stay Connected</h4>
-          <p class="small">
-            Get updates about my latest projects and development work.
-          </p>
-
-          <form class="form">
-            <input type="email" placeholder="Your email" />
-            <button type="submit">Subscribe</button>
-          </form>
+        <!-- CONTACT -->
+        <div class="contact">
+          <h4>Contact</h4>
+          <p class="email">muneebtariq841@gmail.com</p>
+          <a href="https://github.com/muneeb-tariq3" target="_blank">
+            GitHub Profile
+          </a>
         </div>
 
       </div>
 
+      <!-- DIVIDER -->
       <div class="divider"></div>
 
-      <!-- BOTTOM BAR -->
+      <!-- BOTTOM -->
       <div class="bottom">
-
-        <p>© 2025 Muneeb-ur-Rehman. All rights reserved.</p>
-
-        <div class="socials">
-          <a href="https://github.com/muneeb-tariq3" target="_blank">GitHub</a>
-          <a href="mailto:muneebtariq841@gmail.com">Email</a>
-          <a href="#home">Portfolio</a>
-        </div>
-
+        <p>© 2026 Muneeb. All rights reserved.</p>
+        <p class="note">
+          Seeking an internship to gain hands-on experience in tools, systems, teams, and real-world development challenges.
+        </p>
       </div>
 
     </div>
@@ -68,170 +53,137 @@
 </template>
 
 <script setup>
-// static footer
+const emit = defineEmits(["navigate"])
+
+const go = (section) => {
+  emit("navigate", section)
+}
 </script>
 
 <style scoped>
-/* =======================
-   FOOTER BACKGROUND
-======================= */
+/* =========================
+   BASE FOOTER
+========================= */
 .footer {
   background: #0D1321;
-  padding: 60px 20px;
   color: #F0EBD8;
+  padding: 70px 20px;
 }
 
-/* =======================
-   GLASS CONTAINER
-======================= */
-.footer-glass {
+/* subtle background depth */
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(116,140,171,0.12), transparent 60%);
+  z-index: 0;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.container {
+  position: relative;
+  z-index: 2;
   max-width: 1100px;
   margin: auto;
-
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 25px;
-
-  padding: 40px;
-
-  box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.35),
-    inset 0 1px 1px rgba(255,255,255,0.08);
 }
 
-/* =======================
-   GRID LAYOUT
-======================= */
-.footer-grid {
+/* TOP GRID */
+.top {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.2fr;
-  gap: 30px;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
 }
 
-/* =======================
-   BRAND
-======================= */
-.logo {
-  font-size: 1.4rem;
-  color: #748CAB;
+/* BRAND */
+.brand h2 {
+  font-size: 1.8rem;
   margin-bottom: 10px;
 }
 
-.desc {
-  font-size: 0.9rem;
-  opacity: 0.85;
+.brand h2 span {
+  color: #748CAB;
+}
+
+.brand p {
+  opacity: 0.8;
   line-height: 1.6;
+  font-size: 0.95rem;
 }
 
-/* =======================
-   LINKS
-======================= */
-.col h4 {
-  margin-bottom: 10px;
+/* HEADINGS */
+h4 {
   color: #748CAB;
+  margin-bottom: 12px;
+  font-size: 1rem;
 }
 
-.col a {
+/* LINKS */
+.links a,
+.contact a {
   display: block;
-  text-decoration: none;
   color: #F0EBD8;
   opacity: 0.75;
-
+  text-decoration: none;
   margin-bottom: 8px;
-
-  transition: 0.3s;
-}
-
-.col a:hover {
-  opacity: 1;
-  transform: translateX(3px);
-}
-
-/* =======================
-   FORM
-======================= */
-.form {
-  display: flex;
-  margin-top: 10px;
-}
-
-.form input {
-  flex: 1;
-  padding: 8px 10px;
-
-  border: none;
-  outline: none;
-
-  border-radius: 8px 0 0 8px;
-}
-
-.form button {
-  padding: 8px 12px;
-
-  border: none;
   cursor: pointer;
-
-  background: #748CAB;
-  color: #0D1321;
-
-  border-radius: 0 8px 8px 0;
-
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
-.form button:hover {
-  background: #F0EBD8;
+.links a:hover,
+.contact a:hover {
+  opacity: 1;
+  transform: translateX(4px);
 }
 
-/* =======================
-   DIVIDER
-======================= */
+/* EMAIL */
+.email {
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+/* DIVIDER */
 .divider {
   height: 1px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.1);
   margin: 30px 0;
 }
 
-/* =======================
-   BOTTOM BAR
-======================= */
+/* BOTTOM */
 .bottom {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 
   font-size: 0.85rem;
-  opacity: 0.85;
+  opacity: 0.7;
 }
 
-.socials a {
-  margin-left: 15px;
-  text-decoration: none;
-  color: #F0EBD8;
-
-  opacity: 0.75;
-  transition: 0.3s;
+/* NOTE (internship line) */
+.note {
+  max-width: 500px;
 }
 
-.socials a:hover {
-  opacity: 1;
-  color: #748CAB;
-}
-
-/* =======================
+/* =========================
    RESPONSIVE
-======================= */
-@media (max-width: 900px) {
-  .footer-grid {
+========================= */
+@media (max-width: 768px) {
+  .top {
     grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .links a,
+  .contact a {
+    display: inline-block;
+    margin: 5px 10px;
   }
 
   .bottom {
-    flex-direction: column;
-    gap: 10px;
+    justify-content: center;
+    text-align: center;
   }
 }
 </style>
