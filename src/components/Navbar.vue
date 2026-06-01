@@ -10,10 +10,10 @@
 
       <!-- LINKS -->
       <nav class="nav-links">
-        <a href="#About">About</a>
-        <a href="#Skills">Skills</a>
-        <a href="#Projects">Projects</a>
-        <a href="#Contact">Contact</a>
+        <a href="#About.vue">About</a>
+        <a href="#Skills.vue">Skills</a>
+        <a href="#Projects.vue">Projects</a>
+        <a href="#Contact.vue">Contact</a>
       </nav>
 
     </div>
