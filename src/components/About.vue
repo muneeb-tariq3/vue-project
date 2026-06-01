@@ -1,4 +1,4 @@
-<template>
+ <template>
   <section class="about-section" id="about">
     <div class="container">
 
@@ -69,7 +69,7 @@
 
         <div class="glass-card stat-card">
           <h3>2+</h3>
-          <p>Years Experience</p>
+          <p>Years Learning</p>
         </div>
 
         <div class="glass-card stat-card">
