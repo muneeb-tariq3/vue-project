@@ -3,7 +3,7 @@
 
     <div class="nav-inner">
 
-      <!-- BRAND -->
+      <!-- LOGO -->
       <div class="logo">
         Muneeb<span>.</span>
       </div>
@@ -27,93 +27,92 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { ref, onMounted, onUnmounted } from "vue"
 
 const emit = defineEmits(["navigate"])
-
 const isScrolled = ref(false)
 
 const go = (section) => {
   emit("navigate", section)
 }
 
-/* scroll detection */
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 30
+}
+
 onMounted(() => {
-  window.addEventListener("scroll", () => {
-    isScrolled.value = window.scrollY > 20
-  })
+  window.addEventListener("scroll", handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll)
 })
 </script>
 
 <style scoped>
+
 /* =========================
-   BASE NAVBAR (TOP STATE)
+   NAVBAR BASE (TOUCHING TOP)
 ========================= */
 .navbar {
   position: fixed;
-  top: 12px;
+  top: 0;
   left: 0;
   right: 0;
+
   z-index: 999;
 
   display: flex;
   justify-content: center;
 
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* INNER GLASS BAR */
+/* INNER BAR */
 .nav-inner {
   width: 100%;
-  height: 58px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding: 0 30px;
+  padding: 14px 40px;
 
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
 
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.25),
-    inset 0 1px 1px rgba(255,255,255,0.08);
-
-  border-radius: 0px;
-
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* =========================
-   SCROLLED STATE (APPLE FLOAT BAR)
+   SCROLLED STATE (APPLE MORPH)
 ========================= */
 .navbar.scrolled .nav-inner {
   width: 92%;
   margin: 0 auto;
 
-  border-radius: 40px;
+  border-radius: 0 0 28px 28px;
 
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(28px);
 
-  transform: translateY(2px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 
   box-shadow:
-    0 15px 45px rgba(0, 0, 0, 0.35),
-    inset 0 1px 1px rgba(255,255,255,0.12);
+    0 10px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255,255,255,0.08);
 }
 
 /* =========================
    LOGO
 ========================= */
 .logo {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #F0EBD8;
+  color: #ffffff;
 }
 
 .logo span {
@@ -125,21 +124,22 @@ onMounted(() => {
 ========================= */
 .links {
   display: flex;
-  gap: 22px;
+  gap: 24px;
 }
 
 .links a {
-  color: #F0EBD8;
+  color: #ffffff;
   text-decoration: none;
 
   font-size: 0.95rem;
-  opacity: 0.85;
+  font-weight: 500;
 
-  cursor: pointer;
+  opacity: 0.9;
 
   position: relative;
+  cursor: pointer;
 
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 /* hover underline */
@@ -152,7 +152,7 @@ onMounted(() => {
   width: 0%;
   height: 2px;
 
-  background: linear-gradient(90deg, #748CAB, #F0EBD8);
+  background: #ffffff;
 
   transition: width 0.3s ease;
 }
@@ -170,12 +170,13 @@ onMounted(() => {
    RESPONSIVE
 ========================= */
 @media (max-width: 768px) {
-  .links {
-    display: none;
+  .nav-inner {
+    padding: 12px 18px;
   }
 
-  .nav-inner {
-    justify-content: center;
+  .links {
+    gap: 12px;
+    font-size: 0.85rem;
   }
 }
 </style>
