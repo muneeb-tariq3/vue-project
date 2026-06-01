@@ -154,7 +154,7 @@ onUnmounted(() => {
 }
 
 .links a {
-  color: #fff;
+  color: rgb(255,255,255);
   text-decoration: none;
   cursor: pointer;
   transition: 0.3s;
