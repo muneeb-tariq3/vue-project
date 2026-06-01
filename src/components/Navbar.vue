@@ -10,10 +10,10 @@
 
       <!-- LINKS -->
       <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+        <a href="#About">About</a>
+        <a href="#Skills">Skills</a>
+        <a href="#Projects">Projects</a>
+        <a href="#Contact">Contact</a>
       </nav>
 
     </div>
