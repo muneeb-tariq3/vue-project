@@ -8,8 +8,8 @@
         Muneeb<span>.</span>
       </div>
 
-      <!-- LINKS -->
-      <nav class="links">
+      <!-- DESKTOP LINKS -->
+      <nav class="links desktop">
 
         <a @click="go('Home')">Home</a>
         <a @click="go('About')">About</a>
@@ -21,7 +21,30 @@
 
       </nav>
 
+      <!-- MOBILE BUTTON -->
+      <div class="menu-btn" @click="toggleMenu">
+        ☰
+      </div>
+
     </div>
+
+    <!-- MOBILE SIDEBAR -->
+    <div class="sidebar" :class="{ open: isMenuOpen }">
+
+      <div class="close-btn" @click="toggleMenu">×</div>
+
+      <a @click="mobileGo('Home')">Home</a>
+      <a @click="mobileGo('About')">About</a>
+      <a @click="mobileGo('Skills')">Skills</a>
+      <a @click="mobileGo('Projects')">Projects</a>
+      <a @click="mobileGo('Services')">Services</a>
+      <a @click="mobileGo('Blog')">Blog</a>
+      <a @click="mobileGo('Contact')">Contact</a>
+
+    </div>
+
+    <!-- BACKDROP -->
+    <div class="backdrop" v-if="isMenuOpen" @click="toggleMenu"></div>
 
   </header>
 </template>
@@ -30,12 +53,24 @@
 import { ref, onMounted, onUnmounted } from "vue"
 
 const emit = defineEmits(["navigate"])
+
 const isScrolled = ref(false)
+const isMenuOpen = ref(false)
 
 const go = (section) => {
   emit("navigate", section)
 }
 
+const mobileGo = (section) => {
+  emit("navigate", section)
+  isMenuOpen.value = false
+}
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value
+}
+
+/* scroll detection */
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 30
 }
@@ -52,26 +87,22 @@ onUnmounted(() => {
 <style scoped>
 
 /* =========================
-   NAVBAR BASE (TOUCHING TOP)
+   NAVBAR BASE
 ========================= */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-
   z-index: 999;
 
   display: flex;
   justify-content: center;
-
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* INNER BAR */
+/* INNER */
 .nav-inner {
   width: 100%;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,12 +115,10 @@ onUnmounted(() => {
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.6s ease;
 }
 
-/* =========================
-   SCROLLED STATE (APPLE MORPH)
-========================= */
+/* SCROLLED (APPLE STYLE) */
 .navbar.scrolled .nav-inner {
   width: 92%;
   margin: 0 auto;
@@ -97,9 +126,6 @@ onUnmounted(() => {
   border-radius: 0 0 28px 28px;
 
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(28px);
-
-  border: 1px solid rgba(255, 255, 255, 0.12);
 
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.35),
@@ -112,7 +138,7 @@ onUnmounted(() => {
 .logo {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #fff;
 }
 
 .logo span {
@@ -120,46 +146,34 @@ onUnmounted(() => {
 }
 
 /* =========================
-   LINKS
+   DESKTOP LINKS
 ========================= */
 .links {
   display: flex;
-  gap: 24px;
+  gap: 22px;
 }
 
 .links a {
-  color: #ffffff;
+  color: #cfcfcf;
   text-decoration: none;
-
-  font-size: 0.95rem;
-  font-weight: 500;
-
-  opacity: 0.9;
-
-  position: relative;
   cursor: pointer;
-
-  transition: all 0.3s ease;
+  transition: 0.3s;
+  position: relative;
 }
 
-/* hover underline */
 .links a::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -6px;
-
+  bottom: -5px;
   width: 0%;
   height: 2px;
-
-  background: #ffffff;
-
-  transition: width 0.3s ease;
+  background: #cfcfcf;
+  transition: width 0.3s;
 }
 
 .links a:hover {
-  opacity: 1;
-  transform: translateY(-1px);
+  color: #fff;
 }
 
 .links a:hover::after {
@@ -167,16 +181,94 @@ onUnmounted(() => {
 }
 
 /* =========================
+   MOBILE MENU BUTTON
+========================= */
+.menu-btn {
+  display: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* =========================
+   SIDEBAR (GLASS STYLE)
+========================= */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -280px;
+
+  width: 260px;
+  height: 100vh;
+
+  background: rgba(13, 19, 33, 0.85);
+  backdrop-filter: blur(25px);
+
+  border-left: 1px solid rgba(255,255,255,0.1);
+
+  display: flex;
+  flex-direction: column;
+  padding: 60px 20px;
+
+  gap: 18px;
+
+  transition: 0.4s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+/* sidebar links */
+.sidebar a {
+  color: #cfcfcf;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #fff;
+  transform: translateX(5px);
+}
+
+/* close button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  font-size: 1.8rem;
+  color: #fff;
+
+  cursor: pointer;
+}
+
+/* backdrop */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+}
+
+/* =========================
    RESPONSIVE
 ========================= */
 @media (max-width: 768px) {
-  .nav-inner {
-    padding: 12px 18px;
-  }
 
   .links {
-    gap: 12px;
-    font-size: 0.85rem;
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
   }
 }
 </style>
