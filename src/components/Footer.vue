@@ -1,106 +1,237 @@
 <template>
-  <footer class="footer py-5 text-light" id="footer">
-    <div class="container">
-      <div class="row">
+  <footer class="footer" id="footer">
 
-        <!-- Company & Description -->
-        <div class="col-md-4 mb-4">
-          <h5 class="footer-title">Muneeb‑ur‑Rehman</h5>
-          <p>
-            Front‑End Developer with a flair for creating modern, responsive, and user‑friendly web applications using Vue.js, Bootstrap, and Tailwind.
+    <div class="footer-glass">
+
+      <!-- TOP SECTION -->
+      <div class="footer-grid">
+
+        <!-- BRAND -->
+        <div class="col">
+          <h3 class="logo">Muneeb-ur-Rehman</h3>
+          <p class="desc">
+            Front-End Developer focused on building modern, responsive,
+            and user-friendly web applications using Vue.js and modern web technologies.
           </p>
         </div>
 
-        <!-- Quick Links -->
-        <div class="col-md-2 mb-4">
-          <h6 class="footer-title">Quick Links</h6>
-          <ul class="list-unstyled">
-            <li><a href="#home" class="footer-link">Home</a></li>
-            <li><a href="#about" class="footer-link">About</a></li>
-            <li><a href="#projects" class="footer-link">Projects</a></li>
-            <li><a href="#contact" class="footer-link">Contact</a></li>
-          </ul>
+        <!-- QUICK LINKS -->
+        <div class="col">
+          <h4>Quick Links</h4>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
         </div>
 
-        <!-- Resources -->
-        <div class="col-md-2 mb-4">
-          <h6 class="footer-title">Resources</h6>
-          <ul class="list-unstyled">
-            <li><a href="#blog" class="footer-link">Blog</a></li>
-            <li><a href="#testimonials" class="footer-link">Testimonials</a></li>
-            <li><a href="/resume.pdf" class="footer-link">Resume</a></li>
-            <li><a href="#services" class="footer-link">Services</a></li>
-          </ul>
+        <!-- RESOURCES (CLEANED) -->
+        <div class="col">
+          <h4>Resources</h4>
+          <a href="#blog">Blog</a>
+          <a href="#services">Services</a>
         </div>
 
-        <!-- Newsletter Signup -->
-        <div class="col-md-4 mb-4">
-          <h6 class="footer-title">Stay Connected</h6>
-          <p>Sign up to get updates on my latest projects and blog posts.</p>
-          <form @submit.prevent class="d-flex">
-            <input type="email" placeholder="Your email" class="form-control me-2" />
-            <button type="submit" class="btn btn-accent">Subscribe</button>
+        <!-- CONNECT -->
+        <div class="col">
+          <h4>Stay Connected</h4>
+          <p class="small">
+            Get updates about my latest projects and development work.
+          </p>
+
+          <form class="form">
+            <input type="email" placeholder="Your email" />
+            <button type="submit">Subscribe</button>
           </form>
         </div>
 
       </div>
 
-      <hr class="footer-separator" />
+      <div class="divider"></div>
 
-      <div class="d-flex justify-content-between align-items-center pt-3">
-        <p class="mb-0">&copy; 2025 Muneeb‑ur‑Rehman. All rights reserved.</p>
-        <div class="social-icons">
-          <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="social-link"><i class="bi bi-github"></i></a>
-          <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+      <!-- BOTTOM BAR -->
+      <div class="bottom">
+
+        <p>© 2025 Muneeb-ur-Rehman. All rights reserved.</p>
+
+        <div class="socials">
+          <a href="https://github.com/muneeb-tariq3" target="_blank">GitHub</a>
+          <a href="mailto:muneebtariq841@gmail.com">Email</a>
+          <a href="#home">Portfolio</a>
         </div>
+
       </div>
+
     </div>
+
   </footer>
 </template>
 
 <script setup>
-// No scripts needed (static footer)
+// static footer
 </script>
 
 <style scoped>
+/* =======================
+   FOOTER BACKGROUND
+======================= */
 .footer {
-  background-color: #1D2D44;
-}
-
-.footer-title {
+  background: #0D1321;
+  padding: 60px 20px;
   color: #F0EBD8;
-  font-weight: bold;
-  margin-bottom: 0.75rem;
 }
 
-.footer-link {
+/* =======================
+   GLASS CONTAINER
+======================= */
+.footer-glass {
+  max-width: 1100px;
+  margin: auto;
+
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 25px;
+
+  padding: 40px;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255,255,255,0.08);
+}
+
+/* =======================
+   GRID LAYOUT
+======================= */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 30px;
+}
+
+/* =======================
+   BRAND
+======================= */
+.logo {
+  font-size: 1.4rem;
   color: #748CAB;
+  margin-bottom: 10px;
+}
+
+.desc {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* =======================
+   LINKS
+======================= */
+.col h4 {
+  margin-bottom: 10px;
+  color: #748CAB;
+}
+
+.col a {
+  display: block;
   text-decoration: none;
-}
-.footer-link:hover {
   color: #F0EBD8;
+  opacity: 0.75;
+
+  margin-bottom: 8px;
+
+  transition: 0.3s;
 }
 
-.btn-accent {
-  background-color: #3E5C76;
-  color: #F0EBD8;
-}
-.btn-accent:hover {
-  background-color: #0D1321;
-  color: #F0EBD8;
+.col a:hover {
+  opacity: 1;
+  transform: translateX(3px);
 }
 
-.footer-separator {
-  border-color: #3E5C76;
+/* =======================
+   FORM
+======================= */
+.form {
+  display: flex;
+  margin-top: 10px;
 }
 
-.social-link {
-  color: #F0EBD8;
-  font-size: 1.25rem;
-  margin-left: 0.75rem;
+.form input {
+  flex: 1;
+  padding: 8px 10px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 8px 0 0 8px;
 }
-.social-link:hover {
+
+.form button {
+  padding: 8px 12px;
+
+  border: none;
+  cursor: pointer;
+
+  background: #748CAB;
+  color: #0D1321;
+
+  border-radius: 0 8px 8px 0;
+
+  transition: 0.3s;
+}
+
+.form button:hover {
+  background: #F0EBD8;
+}
+
+/* =======================
+   DIVIDER
+======================= */
+.divider {
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+  margin: 30px 0;
+}
+
+/* =======================
+   BOTTOM BAR
+======================= */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.socials a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #F0EBD8;
+
+  opacity: 0.75;
+  transition: 0.3s;
+}
+
+.socials a:hover {
+  opacity: 1;
   color: #748CAB;
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bottom {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>
