@@ -2,11 +2,12 @@
   <section class="about-section" id="about">
     <div class="container">
 
-      <!-- HERO -->
+      <!-- HERO SECTION -->
       <div class="hero-grid">
 
-        <!-- TEXT -->
-        <div class="glass-card hero-text" ref="card">
+        <!-- TEXT CARD -->
+        <div class="glass-card hero-text">
+
           <h2 class="title">About Me</h2>
 
           <p class="desc">
@@ -15,40 +16,52 @@
           </p>
 
           <p class="desc">
-            Over the past 2 years, I’ve built real-world projects, improved UI/UX thinking,
-            and developed strong practical experience through consistent hands-on development.
-            I enjoy turning ideas into smooth, interactive, and visually polished interfaces.
+            Over the past 2 years, I’ve built real-world projects, improved UI/UX understanding,
+            and gained strong practical experience by continuously working on frontend development.
           </p>
 
           <p class="desc">
-            I am currently in Matric (Age 16), continuously improving my development skills
-            and working toward real industry-level frontend engineering.
+            I am currently in Matric (Age 16) and actively growing my development skills
+            while working toward professional-level frontend engineering.
           </p>
 
           <!-- BUTTONS -->
           <div class="btn-group">
-            <a href="mailto:muneebtariq841@gmail.com" class="btn glass-btn">
+
+            <a
+              href="mailto:muneebtariq841@gmail.com"
+              class="glass-btn"
+            >
               Email Me
             </a>
 
-            <a href="https://github.com/muneeb-tariq3" target="_blank" class="btn glass-btn">
+            <a
+              href="https://github.com/muneeb-tariq3"
+              target="_blank"
+              class="glass-btn"
+            >
               GitHub
             </a>
+
           </div>
         </div>
 
-        <!-- IMAGE CARD -->
-        <div class="glass-card image-card" ref="imgCard">
+        <!-- IMAGE CARD (FIXED IMPORT ISSUE) -->
+        <div class="glass-card image-card">
+
           <div class="img-frame">
-            <img src="@/assets/pic.png" alt="profile" />
+            <img :src="pic" alt="profile" />
           </div>
+
           <div class="glow"></div>
+
         </div>
 
       </div>
 
       <!-- STATS -->
       <div class="stats-grid">
+
         <div class="glass-card stat-card">
           <h3>45+</h3>
           <p>Projects Built</p>
@@ -61,8 +74,9 @@
 
         <div class="glass-card stat-card">
           <h3>30+</h3>
-          <p>GitHub Repos</p>
+          <p>GitHub Repositories</p>
         </div>
+
       </div>
 
     </div>
@@ -70,41 +84,42 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted } from "vue"
+import pic from "../assets/pic.png"   // ✅ FIXED (NO @ alias issue)
 
 onMounted(() => {
-  const cards = document.querySelectorAll(".glass-card");
+  const cards = document.querySelectorAll(".glass-card")
 
   cards.forEach((card) => {
     card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
+      const rect = card.getBoundingClientRect()
 
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
 
-      const rotateX = -(y / rect.height - 0.5) * 10;
-      const rotateY = (x / rect.width - 0.5) * 10;
+      const rotateX = -(y / rect.height - 0.5) * 10
+      const rotateY = (x / rect.width - 0.5) * 10
 
       card.style.transform = `
         perspective(1000px)
         rotateX(${rotateX}deg)
         rotateY(${rotateY}deg)
         translateY(-6px)
-      `;
+      `
 
-      card.style.setProperty("--x", `${x}px`);
-      card.style.setProperty("--y", `${y}px`);
-    });
+      card.style.setProperty("--x", `${x}px`)
+      card.style.setProperty("--y", `${y}px`)
+    })
 
     card.addEventListener("mouseleave", () => {
       card.style.transform = `
         perspective(1000px)
         rotateX(0deg)
         rotateY(0deg)
-      `;
-    });
-  });
-});
+      `
+    })
+  })
+})
 </script>
 
 <style scoped>
@@ -114,7 +129,7 @@ onMounted(() => {
   color: #F0EBD8;
 }
 
-/* GRID */
+/* LAYOUT */
 .hero-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
@@ -122,7 +137,7 @@ onMounted(() => {
   align-items: center;
 }
 
-/* GLASS BASE */
+/* GLASS EFFECT */
 .glass-card {
   position: relative;
   padding: 25px;
@@ -142,17 +157,20 @@ onMounted(() => {
   overflow: hidden;
 }
 
-/* CURSOR GLOW */
+/* CURSOR LIGHT GLOW */
 .glass-card::after {
   content: "";
   position: absolute;
+
   width: 300px;
   height: 300px;
 
   background: radial-gradient(circle, rgba(116,140,171,0.35), transparent 70%);
+
   left: var(--x, 50%);
   top: var(--y, 50%);
   transform: translate(-50%, -50%);
+
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -166,9 +184,11 @@ onMounted(() => {
 .title {
   font-size: 2.5rem;
   font-weight: 800;
+
   background: linear-gradient(90deg, #F0EBD8, #748CAB);
   -webkit-background-clip: text;
   color: transparent;
+
   margin-bottom: 15px;
 }
 
@@ -206,12 +226,11 @@ onMounted(() => {
   border-color: #748CAB;
 }
 
-/* IMAGE CARD */
+/* IMAGE FRAME */
 .image-card {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 
 .img-frame {
@@ -226,8 +245,7 @@ onMounted(() => {
 
   border: 2px solid rgba(255,255,255,0.2);
 
-  box-shadow:
-    0 0 30px rgba(116,140,171,0.3);
+  box-shadow: 0 0 30px rgba(116,140,171,0.3);
 }
 
 .img-frame img {
