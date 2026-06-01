@@ -1,26 +1,41 @@
 <template>
-  <section class="home-section d-flex align-items-center" id="home">
+  <section class="home-section">
+
+    <!-- BACKGROUND IMAGE -->
+    <div class="bg"></div>
+
+    <!-- OVERLAY -->
     <div class="overlay"></div>
-    <div class="container text-center content">
-      <h1 class="display-4 fw-bold text-light mb-3">
-        Hi, I'm <span class="highlight">Muneeb</span>
-      </h1>
-      <h3 class="typing-text mb-4">{{ displayedText }}</h3>
 
-      <p class="lead text-light">
-        I'm a <strong>15-year-old front-end developer</strong> from Pakistan who turns bold ideas into functional, elegant websites. I specialize in Vue.js, TailwindCSS, JavaScript, and responsive UI development.
-      </p>
+    <!-- CONTENT -->
+    <div class="content">
 
-      <p class="text-light mb-3">
-        I started coding with curiosity and a passion for design. Today, I build polished, high-performing user interfaces that are mobile-friendly, fast, and visually appealing. Whether it's a portfolio, a business website, or an interactive web app — I aim for pixel-perfect detail and smooth user experiences.
-      </p>
+      <div class="glass-card">
 
-      <p class="text-light mb-4">
-        I'm constantly learning, improving, and creating. My mission is to grow as a full-stack developer and contribute to meaningful digital products that solve real-world problems.
-      </p>
+        <h1 class="title">
+          Hi, I'm <span class="highlight">Muneeb</span>
+        </h1>
 
-      <a href="#projects" class="btn btn-outline-light btn-lg custom-btn">View My Work</a>
+        <h3 class="typing-text">{{ displayedText }}</h3>
+
+        <p class="text">
+          I'm a <strong>15-year-old front-end developer</strong> from Pakistan who turns bold ideas into functional, elegant websites. I specialize in Vue.js, TailwindCSS, JavaScript, and responsive UI development.
+        </p>
+
+        <p class="text">
+          I started coding with curiosity and a passion for design. Today, I build polished, high-performing user interfaces that are mobile-friendly, fast, and visually appealing.
+        </p>
+
+        <p class="text">
+          I'm constantly learning, improving, and creating. My mission is to grow as a full-stack developer and contribute to meaningful digital products.
+        </p>
+
+        <a href="#projects" class="btn">View My Work</a>
+
+      </div>
+
     </div>
+
   </section>
 </template>
 
@@ -35,17 +50,16 @@ function typeRole() {
   let text = roles[current]
   let i = 0
   displayedText.value = ''
+
   const typing = setInterval(() => {
     if (i < text.length) {
       displayedText.value += text[i]
       i++
     } else {
       clearInterval(typing)
-      setTimeout(() => {
-        eraseRole()
-      }, 2000)
+      setTimeout(eraseRole, 1800)
     }
-  }, 100)
+  }, 90)
 }
 
 function eraseRole() {
@@ -57,35 +71,85 @@ function eraseRole() {
       current = (current + 1) % roles.length
       setTimeout(typeRole, 300)
     }
-  }, 50)
+  }, 40)
 }
 
 onMounted(typeRole)
 </script>
 
 <style scoped>
+
+/* =========================
+   SECTION
+========================= */
 .home-section {
   position: relative;
   min-height: 100vh;
-  background: url('https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=1600&q=80')
-    no-repeat center center / cover;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1rem;
-  color: #f0ebd8;
 }
 
+/* =========================
+   BACKGROUND IMAGE
+========================= */
+.bg {
+  position: absolute;
+  inset: 0;
+
+  background-image: url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d");
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.1);
+}
+
+/* DARK OVERLAY */
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(13, 19, 33, 0.85), rgba(29, 45, 68, 0.9));
-  z-index: 1;
+  background: rgba(13, 19, 33, 0.75);
 }
 
+/* =========================
+   CONTENT WRAP
+========================= */
 .content {
   position: relative;
   z-index: 2;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* =========================
+   GLASS CARD (APPLE STYLE)
+========================= */
+.glass-card {
+  max-width: 750px;
+  padding: 45px;
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,0.45),
+    inset 0 1px 1px rgba(255,255,255,0.08);
+
+  text-align: center;
+}
+
+/* =========================
+   TEXT STYLES
+========================= */
+.title {
+  font-size: 2.8rem;
+  color: #fff;
+  margin-bottom: 10px;
 }
 
 .highlight {
@@ -93,33 +157,59 @@ onMounted(typeRole)
 }
 
 .typing-text {
-  font-size: 1.5rem;
-  color: #3e5c76;
+  font-size: 1.4rem;
+  color: #cfcfcf;
+  margin-bottom: 20px;
+  min-height: 30px;
   font-weight: 600;
-  min-height: 2.5rem;
-  height: 2.5rem;
 }
 
-.custom-btn {
-  border-radius: 30px;
-  padding: 0.75rem 2rem;
-  border-color: #748cab;
-  color: #f0ebd8;
-  transition: all 0.3s ease;
+.text {
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+  margin-bottom: 15px;
 }
 
-.custom-btn:hover {
-  background-color: #748cab;
-  color: #0d1321;
-  border-color: #748cab;
+/* =========================
+   BUTTON
+========================= */
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+
+  padding: 12px 26px;
+  border-radius: 14px;
+
+  text-decoration: none;
+
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  transition: 0.3s ease;
 }
 
+.btn:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.15);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 768px) {
-  .display-4 {
+
+  .glass-card {
+    padding: 25px;
+  }
+
+  .title {
     font-size: 2rem;
   }
+
   .typing-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 }
 </style>
