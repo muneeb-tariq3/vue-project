@@ -1,188 +1,218 @@
 <template>
-  <section class="services py-5" id="services">
+  <section class="services-section" id="services">
+
     <div class="container">
-      <h2 class="section-title text-center mb-5">My Services</h2>
-      <div class="row g-4">
-        <div
-          v-for="(service, index) in services"
-          :key="index"
-          class="col-md-6 col-lg-4"
-        >
-          <div
-            class="card service-card h-100 fade-in"
-            :style="{ animationDelay: `${index * 0.3}s` }"
-          >
-            <div class="card-body">
-              <div class="text-center mb-3">
-                <i :class="service.icon" class="service-icon"></i>
-              </div>
-              <h5 class="card-title text-center">{{ service.title }}</h5>
-              <ul class="service-points">
-                <li v-for="(point, i) in service.points" :key="i">
-                  {{ point }}
-                </li>
-              </ul>
-            </div>
-          </div>
+
+      <!-- TITLE -->
+      <h2 class="title">Services</h2>
+
+      <!-- MAIN MESSAGE -->
+      <p class="subtitle">
+        I am currently seeking an internship to gain hands-on practical experience in tools, systems, teams, and real-world development challenges.
+      </p>
+
+      <!-- GLASS GRID -->
+      <div class="services-grid">
+
+        <div class="glass-card service-card">
+
+          <h3>Frontend Development</h3>
+          <p>
+            Building responsive, fast, and interactive user interfaces using modern frameworks and clean UI architecture.
+          </p>
+
         </div>
+
+        <div class="glass-card service-card">
+
+          <h3>UI Engineering</h3>
+          <p>
+            Translating designs into pixel-perfect, responsive interfaces with strong focus on usability and performance.
+          </p>
+
+        </div>
+
+        <div class="glass-card service-card">
+
+          <h3>Web Application Development</h3>
+          <p>
+            Developing modern web applications with scalable structure, reusable components, and API integration.
+          </p>
+
+        </div>
+
       </div>
+
     </div>
+
   </section>
 </template>
 
 <script setup>
-const services = [
-  {
-    title: 'Web Development',
-    icon: 'fas fa-code',
-    points: [
-      'Build fast and responsive websites using HTML, CSS, and JS.',
-      'Cross-browser and cross-device compatibility.',
-      'SEO-friendly and accessible layouts.',
-      'Pixel-perfect designs from Figma or XD.',
-      'Performance optimized and secure.',
-      'Deploy static or dynamic websites.',
-      'Ongoing maintenance and updates.',
-      'Modern practices using Bootstrap and frameworks.',
-      'Intuitive user interface development.',
-      'Custom web solutions for all business types.'
-    ]
-  },
-  {
-    title: 'UI/UX Design',
-    icon: 'fas fa-pencil-ruler',
-    points: [
-      'Create clean and functional interface designs.',
-      'Wireframing, prototyping, and final design delivery.',
-      'Focused on user-centered design approach.',
-      'Mobile-first and responsive thinking.',
-      'Accessibility and modern design standards.',
-      'Reusable component-based systems.',
-      'Elegant typography and color usage.',
-      'Collaborate easily with developers.',
-      'Fast iterations using Figma/Adobe XD.',
-      'Designs that improve user retention and conversion.'
-    ]
-  },
-  {
-    title: 'Front-End Development',
-    icon: 'fas fa-laptop-code',
-    points: [
-      'Vue.js, React, Angular front-end development.',
-      'Reusable, modular and clean code.',
-      'Single Page Applications with dynamic routing.',
-      'Component-driven architecture.',
-      'CSS animations, transitions and interactivity.',
-      'Responsive layout using Flexbox/Grid.',
-      'Optimized JavaScript with ES6+.',
-      'REST API and Firebase integration.',
-      'Bug fixing and UI improvements.',
-      'Use of TailwindCSS and Bootstrap effectively.'
-    ]
-  }
-];
+import { onMounted } from "vue"
+
+/* 3D hover effect */
+onMounted(() => {
+  const cards = document.querySelectorAll(".service-card")
+
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect()
+
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+
+      const rotateX = -(y / rect.height - 0.5) * 8
+      const rotateY = (x / rect.width - 0.5) * 8
+
+      card.style.transform = `
+        perspective(1000px)
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        translateY(-6px)
+      `
+
+      card.style.setProperty("--x", `${x}px`)
+      card.style.setProperty("--y", `${y}px`)
+    })
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform =
+        "perspective(1000px) rotateX(0deg) rotateY(0deg)"
+    })
+  })
+})
 </script>
 
 <style scoped>
-/* Section styling */
-.services {
-  background-color: #1D2D44;
-}
-.section-title {
+.services-section {
+  background: #0D1321;
+  padding: 80px 20px;
   color: #F0EBD8;
-}
-
-/* Card base style */
-.service-card {
-  background-color: #0D1321;
-  border: 1px solid #3E5C76;
-  color: #F0EBD8;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 12px;
-  overflow: hidden;
   position: relative;
-  padding-bottom: 1rem;
-}
-
-/* Hover effect */
-.service-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 20px rgba(116, 140, 171, 0.3);
-}
-
-/* Icon & Title */
-.service-icon {
-  color: #3E5C76;
-  font-size: 2rem;
-}
-.card-title {
-  color: #748CAB;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-/* Description (points) appear on hover */
-.service-points {
-  max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease;
-  padding-left: 1.2rem;
-  list-style-type: disc;
-  font-size: 0.9rem;
-}
-.service-card:hover .service-points {
-  max-height: 300px;
-}
-.service-points li {
-  color: #F0EBD8;
-  margin-bottom: 6px;
 }
 
-/* Fade-in animation */
-.fade-in {
+/* background glow (Apple style depth) */
+.services-section::before,
+.services-section::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  filter: blur(120px);
+  z-index: 0;
+}
+
+.services-section::before {
+  background: #3E5C76;
+  top: -100px;
+  left: -100px;
+  opacity: 0.4;
+}
+
+.services-section::after {
+  background: #748CAB;
+  bottom: -100px;
+  right: -100px;
+  opacity: 0.3;
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 800;
+
+  background: linear-gradient(90deg, #F0EBD8, #748CAB);
+  -webkit-background-clip: text;
+  color: transparent;
+
+  position: relative;
+  z-index: 2;
+}
+
+/* SUBTITLE */
+.subtitle {
+  text-align: center;
+  max-width: 700px;
+  margin: 20px auto 50px auto;
+
+  opacity: 0.85;
+  line-height: 1.6;
+
+  position: relative;
+  z-index: 2;
+}
+
+/* GRID */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+
+  position: relative;
+  z-index: 2;
+}
+
+/* GLASS CARD */
+.glass-card {
+  padding: 25px;
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255,255,255,0.08);
+
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+/* hover glow */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+
+  background: radial-gradient(circle, rgba(116,140,171,0.3), transparent 70%);
+
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  transform: translate(-50%, -50%);
+
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.6s ease forwards;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+.glass-card:hover::after {
+  opacity: 1;
+}
+
+/* TEXT */
+.service-card h3 {
+  color: #748CAB;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
   }
 }
-.service-card {
-  background-color: #0D1321;
-  border: 1px solid #3E5C76;
-  color: #F0EBD8;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  padding-bottom: 1rem;
-  height: 400px; /* 🧱 Fixed height */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-/* Keep this hidden content within the card */
-.service-points {
-  max-height: 160px; /* fixed inner scrollable area */
-  overflow-y: auto;
-  padding-left: 1.2rem;
-  list-style-type: disc;
-  font-size: 0.9rem;
-  transition: none;
-}
-
-/* Optional: improve scrollbar styling */
-.service-points::-webkit-scrollbar {
-  width: 5px;
-}
-.service-points::-webkit-scrollbar-thumb {
-  background: #3E5C76;
-  border-radius: 10px;
-}
-
 </style>
