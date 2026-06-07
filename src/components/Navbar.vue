@@ -8,7 +8,7 @@
         Muneeb<span>.</span>
       </div>
 
-      <!-- DESKTOP LINKS -->
+      <!-- DESKTOP LINKS (UNCHANGED ORDER) -->
       <nav class="links desktop">
 
         <a @click="go('Home')">Home</a>
@@ -28,7 +28,7 @@
 
     </div>
 
-    <!-- MOBILE SIDEBAR -->
+    <!-- MOBILE SIDEBAR (UNCHANGED ORDER) -->
     <div class="sidebar" :class="{ open: isMenuOpen }">
 
       <div class="close-btn" @click="toggleMenu">×</div>
@@ -70,7 +70,6 @@ const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
 
-/* scroll detection */
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 30
 }
@@ -95,7 +94,6 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   z-index: 999;
-
   display: flex;
   justify-content: center;
 }
@@ -146,7 +144,7 @@ onUnmounted(() => {
 }
 
 /* =========================
-   DESKTOP LINKS
+   LINKS FIX (VISIBLE ON ALL PAGES)
 ========================= */
 .links {
   display: flex;
@@ -154,11 +152,13 @@ onUnmounted(() => {
 }
 
 .links a {
-  color: rgb(255,255,255);
+  color: #e6f0ff; /* FIXED: always visible */
   text-decoration: none;
   cursor: pointer;
   transition: 0.3s;
   position: relative;
+
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
 }
 
 .links a::after {
@@ -173,7 +173,7 @@ onUnmounted(() => {
 }
 
 .links a:hover {
-  color: #fff;
+  color: #ffffff;
 }
 
 .links a:hover::after {
@@ -181,17 +181,17 @@ onUnmounted(() => {
 }
 
 /* =========================
-   MOBILE MENU BUTTON
+   MOBILE BUTTON
 ========================= */
 .menu-btn {
   display: none;
   font-size: 1.8rem;
-  color: #fff;
+  color: #e6f0ff;
   cursor: pointer;
 }
 
 /* =========================
-   SIDEBAR (GLASS STYLE)
+   SIDEBAR
 ========================= */
 .sidebar {
   position: fixed;
@@ -220,13 +220,14 @@ onUnmounted(() => {
   right: 0;
 }
 
-/* sidebar links */
 .sidebar a {
-  color: #cfcfcf;
+  color: #e6f0ff; /* FIXED */
   text-decoration: none;
   font-size: 1rem;
   cursor: pointer;
   transition: 0.3s;
+
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
 }
 
 .sidebar a:hover {
