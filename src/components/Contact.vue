@@ -5,34 +5,22 @@
     <div class="glass-card" v-if="!success">
 
       <h2>Contact Me</h2>
-      <p class="sub">Send me a message — I’ll reply soon.</p>
+      <p class="sub">I’ll reply as soon as possible</p>
 
       <!-- ERROR -->
       <p v-if="error" class="error">{{ error }}</p>
 
       <form @submit.prevent="openConfirm">
 
-        <!-- HONEYPOT (spam protection) -->
+        <!-- HONEYPOT -->
         <input v-model="honeypot" class="hidden-input" autocomplete="off" />
 
-        <!-- NAME -->
         <input v-model="name" type="text" placeholder="Your Name" required />
-
-        <!-- EMAIL -->
         <input v-model="email" type="email" placeholder="Your Email" required />
+        <textarea v-model="message" placeholder="Your Message" required></textarea>
 
-        <!-- MESSAGE -->
-        <textarea
-          v-model="message"
-          placeholder="Your Message"
-          required
-          @input="updateSuggestion"
-        ></textarea>
-
-        <!-- SMART SUGGESTION -->
         <p v-if="suggestion" class="hint">{{ suggestion }}</p>
 
-        <!-- SUBMIT BUTTON -->
         <button :class="{ loading: loading }" type="submit" :disabled="loading">
           {{ loading ? "Sending..." : "Send Message" }}
         </button>
@@ -40,11 +28,11 @@
       </form>
     </div>
 
-    <!-- SUCCESS SCREEN -->
+    <!-- SUCCESS -->
     <div v-if="success" class="success-screen">
       <div class="check">✔</div>
       <h2>Message Sent</h2>
-      <p>Thanks! I’ll get back to you soon.</p>
+      <p>Thanks! I’ll reply soon.</p>
     </div>
 
     <!-- CONFIRM MODAL -->
@@ -70,24 +58,17 @@
 import { ref } from "vue"
 import emailjs from "@emailjs/browser"
 
-/* FORM DATA */
 const name = ref("")
 const email = ref("")
 const message = ref("")
 const honeypot = ref("")
 
-/* STATES */
 const loading = ref(false)
 const success = ref(false)
 const showConfirm = ref(false)
 const error = ref("")
-
-/* UX SUGGESTION */
 const suggestion = ref("")
 
-const startTime = Date.now()
-
-/* SMART SUGGESTIONS */
 function updateSuggestion() {
   if (message.value.length < 5) {
     suggestion.value = "Need a website?"
@@ -98,15 +79,12 @@ function updateSuggestion() {
   }
 }
 
-/* SPAM PROTECTION */
 function isSpam() {
   if (honeypot.value) return true
-  if (message.value.length < 10) return true
-  if (Date.now() - startTime < 2000) return true
+  if (message.value.length < 5) return true
   return false
 }
 
-/* OPEN CONFIRM MODAL */
 function openConfirm() {
   error.value = ""
 
@@ -123,7 +101,6 @@ function openConfirm() {
   showConfirm.value = true
 }
 
-/* SEND EMAIL */
 async function sendEmail() {
   showConfirm.value = false
   loading.value = true
@@ -163,6 +140,9 @@ async function sendEmail() {
   align-items: center;
   background: #0d1321;
   padding: 40px;
+
+  position: relative;
+  z-index: 1;
 }
 
 /* GLASS CARD */
@@ -180,15 +160,21 @@ async function sendEmail() {
 
   color: white;
   text-align: center;
+
+  position: relative;
+  z-index: 2;
 }
 
 .sub {
   color: rgba(255,255,255,0.7);
 }
 
-/* INPUTS */
-input, textarea {
+/* INPUT FIX */
+input,
+textarea {
   width: 100%;
+  box-sizing: border-box;
+
   margin-top: 10px;
   padding: 12px;
 
@@ -197,13 +183,14 @@ input, textarea {
 
   color: white;
   border-radius: 12px;
-  transition: 0.3s;
+
+  outline: none;
 }
 
-input:focus, textarea:focus {
-  outline: none;
+input:focus,
+textarea:focus {
   border-color: #748cab;
-  box-shadow: 0 0 12px rgba(116,140,171,0.4);
+  box-shadow: 0 0 10px rgba(116,140,171,0.4);
 }
 
 .hidden-input {
@@ -229,13 +216,14 @@ button {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  z-index: 2;
 }
 
 button:hover {
   background: rgba(255,255,255,0.15);
 }
 
-/* loading animation */
+/* LOADING */
 button.loading::before {
   content: "";
   position: absolute;
@@ -254,6 +242,9 @@ button.loading::before {
 
 /* SUCCESS */
 .success-screen {
+  position: relative;
+  z-index: 2;
+
   color: white;
   text-align: center;
 }
@@ -263,10 +254,12 @@ button.loading::before {
   color: #4ade80;
 }
 
-/* MODAL */
+/* MODAL FIX */
 .modal {
   position: fixed;
   inset: 0;
+  z-index: 9999;
+
   background: rgba(0,0,0,0.5);
 
   display: flex;
