@@ -1,208 +1,303 @@
 <template>
   <section class="contact-section" id="contact">
 
-    <div class="container">
+    <!-- GLASS CARD -->
+    <div class="glass-card" v-if="!success">
 
-      <!-- HEADER -->
-      <h2 class="title">Contact Me</h2>
-      <p class="subtitle">
-        Have a project in mind or just want to connect? Let’s build something amazing together.
-      </p>
+      <h2>Contact Me</h2>
+      <p class="sub">Send me a message — I’ll reply soon.</p>
 
-      <!-- GLASS CARD -->
-      <div class="glass-card contact-card">
+      <!-- ERROR -->
+      <p v-if="error" class="error">{{ error }}</p>
 
-        <form @submit.prevent="handleSubmit">
+      <form @submit.prevent="openConfirm">
 
-          <!-- NAME -->
-          <div class="input-box">
-            <label>Name</label>
-            <input type="text" placeholder="Your Name" required />
-          </div>
+        <!-- HONEYPOT (spam protection) -->
+        <input v-model="honeypot" class="hidden-input" autocomplete="off" />
 
-          <!-- EMAIL -->
-          <div class="input-box">
-            <label>Email</label>
-            <input type="email" placeholder="Your Email" required />
-          </div>
+        <!-- NAME -->
+        <input v-model="name" type="text" placeholder="Your Name" required />
 
-          <!-- MESSAGE -->
-          <div class="input-box">
-            <label>Message</label>
-            <textarea rows="5" placeholder="Write your message..." required></textarea>
-          </div>
+        <!-- EMAIL -->
+        <input v-model="email" type="email" placeholder="Your Email" required />
 
-          <!-- BUTTON -->
-          <button type="submit" class="send-btn">
-            Send Message
-          </button>
+        <!-- MESSAGE -->
+        <textarea
+          v-model="message"
+          placeholder="Your Message"
+          required
+          @input="updateSuggestion"
+        ></textarea>
 
-        </form>
+        <!-- SMART SUGGESTION -->
+        <p v-if="suggestion" class="hint">{{ suggestion }}</p>
 
+        <!-- SUBMIT BUTTON -->
+        <button :class="{ loading: loading }" type="submit" :disabled="loading">
+          {{ loading ? "Sending..." : "Send Message" }}
+        </button>
+
+      </form>
+    </div>
+
+    <!-- SUCCESS SCREEN -->
+    <div v-if="success" class="success-screen">
+      <div class="check">✔</div>
+      <h2>Message Sent</h2>
+      <p>Thanks! I’ll get back to you soon.</p>
+    </div>
+
+    <!-- CONFIRM MODAL -->
+    <div v-if="showConfirm" class="modal">
+      <div class="modal-box">
+        <h3>Confirm Message</h3>
+
+        <p><b>Name:</b> {{ name }}</p>
+        <p><b>Email:</b> {{ email }}</p>
+        <p><b>Message:</b> {{ message }}</p>
+
+        <div class="actions">
+          <button @click="showConfirm = false">Cancel</button>
+          <button @click="sendEmail">Send</button>
+        </div>
       </div>
-
     </div>
 
   </section>
 </template>
 
 <script setup>
-function handleSubmit() {
-  alert("Thanks! Your message has been submitted.")
+import { ref } from "vue"
+import emailjs from "@emailjs/browser"
+
+/* FORM DATA */
+const name = ref("")
+const email = ref("")
+const message = ref("")
+const honeypot = ref("")
+
+/* STATES */
+const loading = ref(false)
+const success = ref(false)
+const showConfirm = ref(false)
+const error = ref("")
+
+/* UX SUGGESTION */
+const suggestion = ref("")
+
+const startTime = Date.now()
+
+/* SMART SUGGESTIONS */
+function updateSuggestion() {
+  if (message.value.length < 5) {
+    suggestion.value = "Need a website?"
+  } else if (message.value.length < 20) {
+    suggestion.value = "Looking for redesign?"
+  } else {
+    suggestion.value = ""
+  }
+}
+
+/* SPAM PROTECTION */
+function isSpam() {
+  if (honeypot.value) return true
+  if (message.value.length < 10) return true
+  if (Date.now() - startTime < 2000) return true
+  return false
+}
+
+/* OPEN CONFIRM MODAL */
+function openConfirm() {
+  error.value = ""
+
+  if (!name.value || !email.value || !message.value) {
+    error.value = "Please fill all fields"
+    return
+  }
+
+  if (isSpam()) {
+    error.value = "Request blocked"
+    return
+  }
+
+  showConfirm.value = true
+}
+
+/* SEND EMAIL */
+async function sendEmail() {
+  showConfirm.value = false
+  loading.value = true
+
+  try {
+    await emailjs.send(
+      "service_acmauh3",
+      "template_snoqw2a",
+      {
+        from_name: name.value,
+        from_email: email.value,
+        message: message.value
+      },
+      "xFTjC81Y27kS2xSPl"
+    )
+
+    success.value = true
+
+    name.value = ""
+    email.value = ""
+    message.value = ""
+
+  } catch (err) {
+    error.value = "Failed to send message"
+    console.log(err)
+  }
+
+  loading.value = false
 }
 </script>
 
 <style scoped>
 .contact-section {
-  background: #0D1321;
-  padding: 80px 20px;
-  color: #F0EBD8;
-  position: relative;
-  overflow: hidden;
-}
-
-/* floating glow blobs (Apple style background depth) */
-.contact-section::before,
-.contact-section::after {
-  content: "";
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  filter: blur(120px);
-  z-index: 0;
-}
-
-.contact-section::before {
-  background: #3E5C76;
-  top: -80px;
-  left: -80px;
-  opacity: 0.4;
-}
-
-.contact-section::after {
-  background: #748CAB;
-  bottom: -80px;
-  right: -80px;
-  opacity: 0.3;
-}
-
-/* TITLE */
-.title {
-  text-align: center;
-  font-size: 2.8rem;
-  font-weight: 800;
-
-  background: linear-gradient(90deg, #F0EBD8, #748CAB);
-  -webkit-background-clip: text;
-  color: transparent;
-  position: relative;
-  z-index: 2;
-}
-
-.subtitle {
-  text-align: center;
-  margin-bottom: 50px;
-  opacity: 0.8;
-  position: relative;
-  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0d1321;
+  padding: 40px;
 }
 
 /* GLASS CARD */
 .glass-card {
-  position: relative;
-  z-index: 2;
-
-  max-width: 700px;
-  margin: auto;
+  width: 100%;
+  max-width: 600px;
   padding: 30px;
 
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
 
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.35),
-    inset 0 1px 1px rgba(255,255,255,0.08);
-
-  transition: transform 0.3s ease;
+  color: white;
+  text-align: center;
 }
 
-/* 3D HOVER */
-.glass-card:hover {
-  transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
-}
-
-/* INPUT BOX */
-.input-box {
-  margin-bottom: 18px;
-}
-
-label {
-  display: block;
-  font-size: 0.9rem;
-  margin-bottom: 6px;
-  color: #748CAB;
+.sub {
+  color: rgba(255,255,255,0.7);
 }
 
 /* INPUTS */
-input,
-textarea {
+input, textarea {
   width: 100%;
-  padding: 12px 14px;
-
-  border-radius: 12px;
-  border: 1px solid rgba(116,140,171,0.4);
+  margin-top: 10px;
+  padding: 12px;
 
   background: rgba(255,255,255,0.05);
-  color: #F0EBD8;
+  border: 1px solid rgba(255,255,255,0.15);
 
-  outline: none;
-
+  color: white;
+  border-radius: 12px;
   transition: 0.3s;
-  backdrop-filter: blur(10px);
 }
 
-/* focus glow */
-input:focus,
-textarea:focus {
-  border-color: #748CAB;
-  box-shadow: 0 0 15px rgba(116,140,171,0.3);
-  transform: translateY(-2px);
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #748cab;
+  box-shadow: 0 0 12px rgba(116,140,171,0.4);
+}
+
+.hidden-input {
+  display: none;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
 }
 
 /* BUTTON */
-.send-btn {
+button {
   width: 100%;
+  margin-top: 15px;
   padding: 12px;
 
-  margin-top: 10px;
-
+  border-radius: 12px;
   border: none;
-  border-radius: 14px;
+  background: rgba(255,255,255,0.08);
+  color: white;
 
-  background: linear-gradient(90deg, #748CAB, #3E5C76);
-  color: #0D1321;
-
-  font-weight: bold;
   cursor: pointer;
-
-  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
 }
 
-.send-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(116,140,171,0.3);
+button:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* loading animation */
+button.loading::before {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #748cab, #3e5c76);
+  animation: load 1.2s infinite;
+}
+
+@keyframes load {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* SUCCESS */
+.success-screen {
+  color: white;
+  text-align: center;
+}
+
+.check {
+  font-size: 4rem;
+  color: #4ade80;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  width: 90%;
+  max-width: 400px;
+
+  padding: 20px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+
+  border-radius: 16px;
+  color: white;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.actions button {
+  flex: 1;
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  .title {
-    font-size: 2.2rem;
-  }
-
   .glass-card {
     padding: 20px;
   }
