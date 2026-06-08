@@ -8,9 +8,8 @@
         Muneeb<span>.</span>
       </div>
 
-      <!-- DESKTOP LINKS (UNCHANGED ORDER) -->
+      <!-- DESKTOP LINKS -->
       <nav class="links desktop">
-
         <a @click="go('Home')">Home</a>
         <a @click="go('About')">About</a>
         <a @click="go('Skills')">Skills</a>
@@ -18,7 +17,6 @@
         <a @click="go('Services')">Services</a>
         <a @click="go('Blog')">Blog</a>
         <a @click="go('Contact')">Contact</a>
-
       </nav>
 
       <!-- MOBILE BUTTON -->
@@ -28,7 +26,7 @@
 
     </div>
 
-    <!-- MOBILE SIDEBAR (UNCHANGED ORDER) -->
+    <!-- MOBILE SIDEBAR -->
     <div class="sidebar" :class="{ open: isMenuOpen }">
 
       <div class="close-btn" @click="toggleMenu">×</div>
@@ -85,20 +83,19 @@ onUnmounted(() => {
 
 <style scoped>
 
-/* =========================
-   NAVBAR BASE
-========================= */
+/* ================= NAVBAR BASE ================= */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 999;
+
   display: flex;
   justify-content: center;
 }
 
-/* INNER */
+/* INNER GLASS BAR */
 .nav-inner {
   width: 100%;
   display: flex;
@@ -108,15 +105,15 @@ onUnmounted(() => {
   padding: 14px 40px;
 
   background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 
-  transition: all 0.6s ease;
+  transition: all 0.5s ease;
 }
 
-/* SCROLLED (APPLE STYLE) */
+/* SCROLLED APPLE STYLE */
 .navbar.scrolled .nav-inner {
   width: 92%;
   margin: 0 auto;
@@ -125,14 +122,10 @@ onUnmounted(() => {
 
   background: rgba(255, 255, 255, 0.08);
 
-  box-shadow:
-    0 10px 40px rgba(0, 0, 0, 0.35),
-    inset 0 1px 1px rgba(255,255,255,0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
 }
 
-/* =========================
-   LOGO
-========================= */
+/* ================= LOGO ================= */
 .logo {
   font-size: 1.3rem;
   font-weight: 700;
@@ -143,22 +136,23 @@ onUnmounted(() => {
   color: #748CAB;
 }
 
-/* =========================
-   LINKS FIX (VISIBLE ON ALL PAGES)
-========================= */
+/* ================= LINKS FIX ================= */
 .links {
   display: flex;
   gap: 22px;
 }
 
-.links a {
-  color: #e6f0ff; /* FIXED: always visible */
+.links a,
+.sidebar a {
+  color: #f5f7fa !important; /* FIXED VISIBILITY */
   text-decoration: none;
   cursor: pointer;
   transition: 0.3s;
-  position: relative;
+  font-weight: 500;
+}
 
-  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+.links a {
+  position: relative;
 }
 
 .links a::after {
@@ -180,19 +174,15 @@ onUnmounted(() => {
   width: 100%;
 }
 
-/* =========================
-   MOBILE BUTTON
-========================= */
+/* ================= MOBILE ================= */
 .menu-btn {
   display: none;
   font-size: 1.8rem;
-  color: #e6f0ff;
+  color: #fff;
   cursor: pointer;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
+/* ================= SIDEBAR ================= */
 .sidebar {
   position: fixed;
   top: 0;
@@ -201,7 +191,7 @@ onUnmounted(() => {
   width: 260px;
   height: 100vh;
 
-  background: rgba(13, 19, 33, 0.85);
+  background: rgba(13, 19, 33, 0.9);
   backdrop-filter: blur(25px);
 
   border-left: 1px solid rgba(255,255,255,0.1);
@@ -209,7 +199,6 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   padding: 60px 20px;
-
   gap: 18px;
 
   transition: 0.4s ease;
@@ -220,22 +209,11 @@ onUnmounted(() => {
   right: 0;
 }
 
-.sidebar a {
-  color: #e6f0ff; /* FIXED */
-  text-decoration: none;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-
-  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
-}
-
 .sidebar a:hover {
-  color: #fff;
-  transform: translateX(5px);
+  transform: translateX(6px);
 }
 
-/* close button */
+/* CLOSE BTN */
 .close-btn {
   position: absolute;
   top: 15px;
@@ -243,27 +221,19 @@ onUnmounted(() => {
 
   font-size: 1.8rem;
   color: #fff;
-
   cursor: pointer;
 }
 
-/* backdrop */
+/* BACKDROP */
 .backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-
+  inset: 0;
   background: rgba(0,0,0,0.4);
   z-index: 999;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-
   .links {
     display: none;
   }
