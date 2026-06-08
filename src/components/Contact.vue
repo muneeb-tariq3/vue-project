@@ -108,7 +108,7 @@ async function sendEmail() {
   try {
     await emailjs.send(
       "service_acmauh3",
-      "template_xs2ffnq,  
+      "template_xs2ffnq",  
       {
         from_name: name.value,
         from_email: email.value,
