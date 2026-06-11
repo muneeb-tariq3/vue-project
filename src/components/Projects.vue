@@ -30,6 +30,27 @@
             <span>{{ project.tech }}</span>
           </div>
 
+          <!-- BUTTONS -->
+          <a
+            v-if="project.link"
+            :href="project.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-btn"
+          >
+            <i class="bi bi-box-arrow-up-right"></i>
+            Live Demo
+          </a>
+
+          <button
+            v-else
+            class="project-btn coming-soon"
+            disabled
+          >
+            <i class="bi bi-clock-history"></i>
+            Coming Soon
+          </button>
+
         </div>
 
       </div>
@@ -47,47 +68,85 @@ const projects = [
     title: "Vue Portfolio Website",
     description:
       "A modern portfolio site built with Vue.js and Bootstrap showcasing skills, projects, and contact form. Fully responsive and animated.",
-    tech: "Vue.js, Bootstrap, HTML, CSS, JavaScript"
+    tech: "Vue.js, Bootstrap, HTML, CSS, JavaScript",
+    link: "https://muneeb-tariq.netlify.app"
   },
   {
     title: "School Management System",
     description:
       "Full-stack school management platform built with React.js, Bootstrap, and Laravel. Contributed to frontend development, project management, and system planning in a two-developer team.",
-    tech: "React.js, Bootstrap, Laravel, API Integration"
+    tech: "React.js, Bootstrap, Laravel, API Integration",
+    link: ""
   },
   {
     title: "Python Voice Automation Assistant",
     description:
       "Desktop automation assistant built with Python that executes voice and text commands, manages files and folders, fetches Wikipedia information, and performs system operations.",
-    tech: "Python, Speech Recognition, OS Automation, APIs"
+    tech: "Python, Speech Recognition, OS Automation, APIs",
+    link: ""
   },
   {
     title: "2D Stickman Fighting Game",
     description:
       "Browser-based multiplayer fighting game with levels, boss battles, and local multiplayer mode on PC and mobile.",
-    tech: "HTML, CSS, JavaScript, Game Logic, Canvas"
+    tech: "HTML, CSS, JavaScript, Game Logic, Canvas",
+    link: ""
   },
   {
     title: "AI Lyrics Generator",
     description:
       "AI-powered lyrics generator using OpenRouter API that creates creative song lyrics from prompts with a modern UI.",
-    tech: "React.js, TypeScript, OpenRouter API, CSS"
+    tech: "React.js, TypeScript, OpenRouter API, CSS",
+    link: ""
   },
   {
     title: "Music Player UI",
     description:
       "Modern UI design of a music player with responsive layout and smooth animations inspired by modern design systems.",
-    tech: "React.js, Bootstrap, UI/UX Design, CSS"
+    tech: "React.js, Bootstrap, UI/UX Design, CSS",
+    link: ""
   },
   {
     title: "To-Do App (Vue)",
     description:
       "Feature-rich to-do application with task management, priority tags, due dates, and persistent local storage support.",
-    tech: "Vue 3, LocalStorage, JavaScript, CSS"
+    tech: "Vue 3, LocalStorage, JavaScript, CSS",
+    link: ""
+  },
+
+  {
+    title: "AI Portfolio",
+    description:
+      "Interactive AI-powered portfolio website integrating ChatGPT-4, Gemini 2.5, and DeepSeek with modern UI.",
+    tech: "Vue.js, AI APIs, JavaScript",
+    link: "https://muneebtariq.netlify.app"
+  },
+
+  {
+    title: "Weather App",
+    description:
+      "Real-time weather application with live forecasts, humidity, wind speed, and location tracking.",
+    tech: "React.js, Weather API, JavaScript",
+    link: "https://weather-calcam.netlify.app"
+  },
+
+  {
+    title: "E-Commerce Clone UI",
+    description:
+      "Modern e-commerce UI clone with product listings, layout system, and responsive design.",
+    tech: "React.js, CSS, UI Design",
+    link: "https://darclone.netlify.app"
+  },
+
+  {
+    title: "Worksheets Platform",
+    description:
+      "Educational worksheet platform for practice and learning with clean UI and structured content.",
+    tech: "HTML, CSS, JavaScript",
+    link: "https://work-sheets.netlify.app"
   }
 ]
 
-/* optional 3D hover effect */
 onMounted(() => {
   const cards = document.querySelectorAll(".project-card")
 
@@ -127,12 +186,10 @@ onMounted(() => {
   color: #F0EBD8;
 }
 
-/* TITLE */
 .title {
   text-align: center;
   font-size: 2.8rem;
   font-weight: 800;
-
   background: linear-gradient(90deg, #F0EBD8, #748CAB);
   -webkit-background-clip: text;
   color: transparent;
@@ -144,46 +201,35 @@ onMounted(() => {
   opacity: 0.8;
 }
 
-/* GRID */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
 }
 
-/* GLASS CARD */
 .glass-card {
   position: relative;
   padding: 22px;
   border-radius: 22px;
-
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-
   border: 1px solid rgba(255, 255, 255, 0.12);
-
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.25),
     inset 0 1px 1px rgba(255,255,255,0.08);
-
   transition: all 0.3s ease;
   overflow: hidden;
 }
 
-/* CURSOR GLOW */
 .glass-card::after {
   content: "";
   position: absolute;
   width: 300px;
   height: 300px;
-
   background: radial-gradient(circle, rgba(116,140,171,0.3), transparent 70%);
-
   left: var(--x, 50%);
   top: var(--y, 50%);
   transform: translate(-50%, -50%);
-
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -193,7 +239,6 @@ onMounted(() => {
   opacity: 1;
 }
 
-/* TEXT */
 .project-title {
   font-size: 1.3rem;
   color: #748CAB;
@@ -207,7 +252,6 @@ onMounted(() => {
   margin-bottom: 12px;
 }
 
-/* TECH */
 .tech {
   font-size: 0.85rem;
   opacity: 0.85;
@@ -218,7 +262,38 @@ onMounted(() => {
   color: #748CAB;
 }
 
-/* RESPONSIVE */
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  background: rgba(116, 140, 171, 0.15);
+  border: 1px solid rgba(116, 140, 171, 0.3);
+  color: #F0EBD8;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.project-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  background: rgba(116, 140, 171, 0.25);
+  box-shadow: 0 0 15px rgba(116, 140, 171, 0.3);
+}
+
+.coming-soon {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.project-btn i {
+  font-size: 1rem;
+}
+
 @media (max-width: 768px) {
   .title {
     font-size: 2.2rem;
